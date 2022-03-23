@@ -4,6 +4,9 @@ use Illuminate\Foundation\Console\RouteCacheCommand;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\usercon;
 use App\Http\Controllers\productcontroller;
+use App\Http\Controllers\vendorcontroller;
+use App\Http\Controllers\orderscontroller;
+use App\Http\Controllers\listscontroller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,10 +17,16 @@ use App\Http\Controllers\productcontroller;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
 
 Route::get('/', function () {
     return view('welcome');
 });
+/*route::get('/view',function(){
+    return view('inventory views.dashboard');
+});*/
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
@@ -44,4 +53,6 @@ Route::get('/vendor', [usercon::class,'vendor'])->name('vendor');
 // });
 
 
-route::resource("products",productcontroller::class);
+route::resource("products",vendorcontroller::class);
+route::get("views",[orderscontroller::class,"orders"]);
+

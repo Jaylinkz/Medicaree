@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('phone');
             $table->string('gender');
             $table->string('password');
+            $table->boolean('is_vendor')->default(false);
             $table->integer('role_id');
             $table->string('companyName')->nullable();
             $table->rememberToken();
